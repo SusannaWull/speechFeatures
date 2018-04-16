@@ -7,8 +7,8 @@
 ## librosa
 librosa 是一个python的语音特征提取工具包，大家也可以安装这个工具包来提取特征，但是我觉得有一些特征自己提反而更加清晰。librosa的安装：
 ```python
-    pip install librosa
-	conda install librosa	# 前提是你安装了anaconda
+    	pip install librosa
+    	conda install librosa	# 前提是你安装了anaconda
 ```
 
 
@@ -28,7 +28,7 @@ librosa 是一个python的语音特征提取工具包，大家也可以安装这
 ## ```enframe```
 看名字都知道是分帧啦，它主要有以下参数：
 ```python
-    signal: 可以是从read_wav读取的一个声道的信号
+    	signal: 可以是从read_wav读取的一个声道的信号
 	frequency: 信号采样率 
 	window_size: 窗大小，以毫秒为单位，如20
 	shift_step: 滑动窗口的步长，以毫秒为单位，一般小于窗口大小，表示相邻两帧之间有重叠
@@ -42,7 +42,7 @@ librosa 是一个python的语音特征提取工具包，大家也可以安装这
 ## ```ERBSpace```
 作为求解伽马通滤波器的一组中心频率，输入参数：
 ```python
-    lowFreq: 最低频率
+    	lowFreq: 最低频率
 	highFreq: 最高频率
 	N: 滤波器阶数
 ```
@@ -53,7 +53,7 @@ librosa 是一个python的语音特征提取工具包，大家也可以安装这
 ## ```MakeERBFilters```
 用于产生伽马通滤波器的系数，里面调用了ERBSpace用于产生一组中心频率，输入参数为：
 ```python
-    fs:	信号的采样频率
+    	fs:	信号的采样频率
 	numChannels: 滤波器通道数，即需要多少个滤波器
 	lowFreq: 最低频率
 	highFreq: 最高频率
@@ -69,7 +69,7 @@ librosa 是一个python的语音特征提取工具包，大家也可以安装这
 ## ```STFT```
 短时傅里叶变换，对前面分帧后的信号进行傅里叶变换，参数：
 ```python
-    signal: 分帧后的二维信号，第一维是帧数，第二维是每一帧的信号
+    	signal: 分帧后的二维信号，第一维是帧数，第二维是每一帧的信号
 	n_point: 傅里叶变换的点数。不足的补0
 ```
 最后输出一个二维数组，表示每一帧的短时傅里叶变换，数值是复数形式
