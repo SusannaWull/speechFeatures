@@ -13,7 +13,6 @@ from scipy.stats import mode
 import json
 import random
 import pandas as pd
-# import gammatone
 import scipy.io as scio
 import librosa
 
@@ -422,9 +421,9 @@ def mfcc(signal, fs):
     :param fs:
     :return:
     """
-    # S = librosa.feature.melspectrogram(y=signal, sr=fs, n_mels=320, fmax=8000)
-    # res_mfcc = librosa.feature.mfcc(S=librosa.power_to_db(S))
-    res_mfcc = librosa.feature.mfcc(y=signal, sr=fs)
+    S = librosa.feature.melspectrogram(y=signal, sr=fs, n_mels=320, fmax=8000, hop_length=320)
+    res_mfcc = librosa.feature.mfcc(S=librosa.power_to_db(S))
+    # res_mfcc = librosa.feature.mfcc(y=signal, sr=fs, n_mfcc=40)
     return res_mfcc
 
 
@@ -453,8 +452,8 @@ def test_cross_spectrum(wav_path):
 
     c, m = crossCorrelation(wav_info['right_data'], wav_info['left_data'])
     print("两个信号时延", m * 1000 / wav_info['fs'], "ms")
-    zcr = zero_cross_ratio(np.array([left_frame[0]]))
-    print("过零率", zcr)
+    zcr = zero_cross_ratio(np.array(left_frame))
+    print("过零率", zcr.shape)
     ste = short_time_energy(left_frame)
     print("短时能量", ste.shape)
     saa = short_time_average_amplitude(left_frame)
@@ -468,6 +467,7 @@ def test_cross_spectrum(wav_path):
     print("mfcc", res_mfcc.shape)
 
     fcoefs, center_freq = MakeERBFilters(wav_info['fs'], 32, 80, 8000)
+    print("伽马通滤波器系数大小", fcoefs.shape)
 
     left_signal_filtering = []
     right_signal_filtering = []
